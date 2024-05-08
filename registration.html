@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration</title>
+<!-- <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #AFEEEF;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    text-align: center;
+  }
+  form {
+    margin-top: 20px;
+  }
+  label {
+    font-weight: bold;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  .login-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+</style> -->
+</head>
+<body>
+
+<div class="container">
+  <h2>Employee Registration Form</h2>
+  <form id="registrationForm" onsubmit="return validateRegistration()">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div><br>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="18" required>
+    </div>
+    <div>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="Enter 10-digit phone number" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" required></textarea>
+    </div>
+    <div>
+      <label>Gender:</label>
+      <input type="radio" id="male" name="gender" value="male" required>
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="female" required>
+      <label for="female">Female</label>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+  <div class="login-link">
+    <a href="login.html">Already have an account? Login here.</a>
+  </div>
+</div>
+
+<script>
+  function validateRegistration() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const phoneNumber = document.getElementById('phoneNumber').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked');
+    const age = document.getElementById('age').value;
+    if (username === '' || password === '' || phoneNumber === '' || email === '' || address === '' || !gender || age === '') {
+      alert('Please fill in all fields.');
+      return false;
+    }
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      alert('Username must contain only letters and numbers.');
+      return false;
+    }
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return false;
+    }
+    if (!/^\d{10}$/.test(phoneNumber)) {
+      alert('Please enter a valid 10-digit phone number.');
+      return false;
+    }
+    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return false;
+    }
+    const user = {
+      username: username,
+      password: password,
+      age: age,
+      phoneNumber: phoneNumber,
+      email: email,
+      address: address,
+      gender: gender.value
+    };
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    registeredUsers.push(user);
+    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+    alert('Registration successful! Please proceed to login.');
+    return true;
+  }
+</script>
+
+</body>
+</html>

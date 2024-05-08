@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Login</title>
+<!-- <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #AFEEEF;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    text-align: center;
+  }
+  form {
+    margin-top: 20px;
+  }
+  label {
+    font-weight: bold;
+  }
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  .register-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+</style> -->
+</head>
+<body>
+
+<div class="container">
+  <h2>Employee Login</h2>
+  <form id="loginForm" onsubmit="return validateLogin()">
+    <div>
+      <label for="loginUsername">Username:</label>
+      <input type="text" id="loginUsername" name="loginUsername" required>
+    </div>
+    <div>
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" name="loginPassword" required>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+  <div class="register-link">
+    <button onclick="window.location.href = 'reg.html'">Register</button>
+  </div>
+</div>
+
+<script>
+  function validateLogin() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    if (username === '' || password === '') {
+      alert('Please fill in all fields.');
+      return false;
+    }
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    for (const user of registeredUsers) {
+      if (user.username === username && user.password === password) {
+        alert('Login Successful!');
+        return true;
+      }
+    }
+    alert('Invalid username or password.');
+    return false;
+  }
+</script>
+
+</body>
+</html>
